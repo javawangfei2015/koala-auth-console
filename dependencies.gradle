@@ -1,0 +1,11 @@
+ext.versions = [
+
+
+]
+
+ext.libraries = [
+
+        'spring-boot-starter-jersey' : 'org.springframework.boot:spring-boot-starter-jersey:1.5.9.RELEASE',
+        'spring-boot-jpa' : 'org.springframework.boot:spring-boot-starter-data-jpa:1.5.9.RELEASE'
+
+]

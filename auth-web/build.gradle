@@ -1,0 +1,10 @@
+dependencies {
+
+    compile project(':auth-api')
+    compile project(':auth-common')
+    compile project(':auth-db')
+    compile project(':auth-redis')
+
+    compile libraries.'spring-boot-starter-jersey'
+
+}

@@ -1,0 +1,123 @@
+import java.text.SimpleDateFormat
+
+apply from: 'dependencies.gradle'
+
+// 所有项目通用配置(包括根项目)
+allprojects {
+
+    // 引入java构建插件
+    apply plugin: 'java'
+    apply plugin: 'idea'
+
+    group 'org.koala'
+
+    // 自定义属性
+    ext {
+
+        // 定义厂商
+        vendor = "KOALA"
+
+        // 定义作者
+        author = "koala"
+
+        // 定义作者邮箱
+        author_email = "javawangfei@163.com"
+
+        // 定义作者qq
+        author_qq = "284189499"
+
+        // 定义产出的版本编号信息
+        // 入参解释
+        // major(重大变更更新版本号)
+        // minor(次要变更更新版本号)
+        // patch(补丁更新版本号)
+        // build(构建版本号)
+        makeVersion = { major, minor, patch, build ->
+
+            def versionBuild = build
+
+            if(versionBuild == null) {
+
+                Calendar calendar = Calendar.getInstance()
+
+                int year = calendar.get(Calendar.YEAR)
+                int month = calendar.get(Calendar.MONTH) + 1
+                int day = calendar.get(Calendar.DAY_OF_MONTH)
+                int hour = calendar.get(Calendar.HOUR_OF_DAY)
+                int minutes = calendar.get(Calendar.MINUTE)
+
+                versionBuild = "${year}${month}${day}${hour}${minutes}"
+
+            }
+
+            "${major}.${minor}.${patch}.${versionBuild}"
+
+        }
+
+        // 定义产出的描述信息(MANIFEST.MF)
+        makeManifest = { project ->
+            return manifest {
+                def buildTimeAndDate = new Date()
+                def buildDate = new SimpleDateFormat('yyyy-MM-dd').format(buildTimeAndDate)
+                def buildTime = new SimpleDateFormat('HH:mm').format(buildTimeAndDate)
+
+                def git_cmd = "git rev-parse HEAD"
+                def git_proc = git_cmd.execute()
+
+
+                attributes 'SCM-Revision': git_proc.text.trim()
+
+                attributes 'Built-By': System.properties['user.name']
+                attributes 'Created-By': System.properties['java.version'] + " (" + System.properties['java.vendor'] + " " + System.getProperty("java.vm.version") + ")"
+                attributes 'Build-Host': InetAddress.localHost.hostName
+                attributes 'Build-Date': buildDate
+                attributes 'Build-Time': buildTime
+                attributes 'Timestamp': String.valueOf(System.currentTimeMillis())
+
+                attributes 'Specification-Title': 'KoalaAuth'
+                attributes 'Specification-Version': version
+                attributes 'Specification-Vendor': vendor
+                attributes 'Implementation-Title': project.jar.baseName
+                attributes 'Implementation-Version': version
+                attributes 'Implementation-Vendor': vendor
+                attributes 'Author': author
+                attributes 'Author-Email': author_email
+                attributes 'Author-QQ': author_qq
+
+            }
+        }
+
+
+        def buildNumber = System.getenv("BUILD_NUMBER")
+        def jenkinsBuild = null != buildNumber ? buildNumber : "0"
+
+        version makeVersion(1, 0, 0, jenkinsBuild)
+
+    }
+
+
+
+}
+
+subprojects { subproject ->
+
+    repositories {
+        mavenCentral()
+    }
+
+    sourceCompatibility = 1.8
+    targetCompatibility = 1.8
+
+    [compileJava, compileTestJava, javadoc]*.options*.encoding = 'UTF-8'
+
+    configurations {
+
+
+    }
+
+    dependencies {
+
+
+    }
+
+}
