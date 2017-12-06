@@ -1,6 +1,7 @@
 package org.koala.auth.db.po;
 
 import javax.persistence.*;
+import java.util.Set;
 
 /**
  * 实体类 - 权限
@@ -22,9 +23,12 @@ public class PermissionPO extends BasePO {
     @Column(name = "ENABLE")
     private Boolean enable;
 
-    @OneToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "RES_ID")
-    private ResourcePO resource;
+    /**
+     * 一个权限关联多个资源
+     */
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "PERMS_ID")
+    private Set<ResourcePO> resources;
 
     public String getPermsName() {
         return permsName;
@@ -42,7 +46,8 @@ public class PermissionPO extends BasePO {
         this.enable = enable;
     }
 
-    public ResourcePO getResource() { return resource; }
+    public Set<ResourcePO> getResources() { return resources; }
 
-    public void setResource(ResourcePO resource) { this.resource = resource; }
+    public void setResources(Set<ResourcePO> resources) { this.resources = resources; }
+
 }

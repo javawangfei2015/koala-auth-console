@@ -29,12 +29,9 @@ public class ResourcePO extends BasePO {
     @Column(name = "API_PATH")
     private String apiPath;
 
-    /**
-     * 一个资源关联多个权限
-     */
-    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    @JoinColumn(name = "RES_ID")
-    private Set<PermissionPO> permissions;
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "PERMS_ID")
+    private PermissionPO permission;
 
     public String getResCode() { return resCode; }
 
@@ -54,7 +51,7 @@ public class ResourcePO extends BasePO {
 
     public void setApiPath(String apiPath) { this.apiPath = apiPath; }
 
-    public Set<PermissionPO> getPermissions() { return permissions; }
+    public PermissionPO getPermission() { return permission; }
 
-    public void setPermissions(Set<PermissionPO> permissions) { this.permissions = permissions; }
+    public void setPermission(PermissionPO permission) { this.permission = permission; }
 }

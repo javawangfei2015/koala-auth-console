@@ -30,15 +30,15 @@ public class RolePO extends BasePO {
     private Boolean enable;
 
     /**
-     * 多个角色关联多个资源
+     * 多个角色关联多个权限
      */
     @JoinTable(
-            name = "T_ROLE_RESOURCE",
+            name = "T_ROLE_PERMISSION",
             joinColumns = @JoinColumn(name = "ROLE_ID", referencedColumnName = "ID"),
-            inverseJoinColumns = @JoinColumn(name = "RES_ID", referencedColumnName = "ID")
+            inverseJoinColumns = @JoinColumn(name = "PERMS_ID", referencedColumnName = "ID")
     )
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private Set<ResourcePO> resources;
+    private Set<PermissionPO> permissions;
 
     public String getRoleCode() {
         return roleCode;
@@ -64,7 +64,7 @@ public class RolePO extends BasePO {
         this.enable = enable;
     }
 
-    public Set<ResourcePO> getResources() { return resources; }
+    public Set<PermissionPO> getPermissions() { return permissions; }
 
-    public void setResources(Set<ResourcePO> resources) { this.resources = resources; }
+    public void setPermissions(Set<PermissionPO> permissions) { this.permissions = permissions; }
 }
