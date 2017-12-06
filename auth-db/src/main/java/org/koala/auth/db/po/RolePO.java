@@ -40,29 +40,17 @@ public class RolePO extends BasePO {
     @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Set<ResourcePO> resources;
 
-    public String getRoleCode() {
-        return roleCode;
-    }
+    public String getRoleCode() { return roleCode; }
 
-    public void setRoleCode(String roleCode) {
-        this.roleCode = roleCode;
-    }
+    public void setRoleCode(String roleCode) { this.roleCode = roleCode; }
 
-    public String getRoleName() {
-        return roleName;
-    }
+    public String getRoleName() { return roleName; }
 
-    public void setRoleName(String roleName) {
-        this.roleName = roleName;
-    }
+    public void setRoleName(String roleName) { this.roleName = roleName; }
 
-    public Boolean getEnable() {
-        return enable;
-    }
+    public Boolean getEnable() { return enable; }
 
-    public void setEnable(Boolean enable) {
-        this.enable = enable;
-    }
+    public void setEnable(Boolean enable) { this.enable = enable; }
 
     public Set<ResourcePO> getResources() { return resources; }
 

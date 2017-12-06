@@ -38,17 +38,11 @@ public class ResourcePO extends BasePO {
 
     public String getResCode() { return resCode; }
 
-    public void setResCode(String resCode) {
-        this.resCode = resCode;
-    }
+    public void setResCode(String resCode) { this.resCode = resCode; }
 
-    public String getResName() {
-        return resName;
-    }
+    public String getResName() { return resName; }
 
-    public void setResName(String resName) {
-        this.resName = resName;
-    }
+    public void setResName(String resName) { this.resName = resName; }
 
     public String getApiPath() { return apiPath; }
 

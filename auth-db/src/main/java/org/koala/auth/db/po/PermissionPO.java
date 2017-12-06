@@ -22,25 +22,20 @@ public class PermissionPO extends BasePO {
     @Column(name = "ENABLE")
     private Boolean enable;
 
+    /**
+     * 一个权限关联一个资源
+     */
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "RES_ID")
     private ResourcePO resource;
 
-    public String getPermsName() {
-        return permsName;
-    }
+    public String getPermsName() { return permsName; }
 
-    public void setPermsName(String permsName) {
-        this.permsName = permsName;
-    }
+    public void setPermsName(String permsName) { this.permsName = permsName; }
 
-    public Boolean getEnable() {
-        return enable;
-    }
+    public Boolean getEnable() { return enable; }
 
-    public void setEnable(Boolean enable) {
-        this.enable = enable;
-    }
+    public void setEnable(Boolean enable) { this.enable = enable; }
 
     public ResourcePO getResource() { return resource; }
 
